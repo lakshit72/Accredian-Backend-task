@@ -24,6 +24,7 @@ app.post('/refer',async (req,res)=>{
         res.status(500).json({
             error:"User Already Exists"
         })
+        return 0;
     }
     try{
 
@@ -37,12 +38,13 @@ app.post('/refer',async (req,res)=>{
         res.status(404).json({
             error:"No User Exists"
         })
+        return 0;
     }
        try{
-           const refRes = prisma.Reffers.create({
+           const refRes = await prisma.Reffers.create({
                data:{
-                   Refferrer:{connect:{Id:referrer.Id}},
-                   Refferee:{connect:{Id:result.Id}}
+                   Refferrer:{connect:{id:referrer.id}},
+                   Refferee:{connect:{id:result.id}}
                 }
             })
             res.json({
