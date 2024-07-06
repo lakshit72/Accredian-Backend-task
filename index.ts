@@ -8,8 +8,8 @@ const prisma = new PrismaClient();
 
 const PORT = 8080;
 
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 
 app.post('/refer',async (req,res)=>{
     const { email, name, PhoneNo, RefEmail } = req.body;
@@ -23,8 +23,8 @@ app.post('/refer',async (req,res)=>{
         });
     }catch(e){
         console.log(e);
-        res.status(500).json({
-            error:"User Already Exists"
+        res.status(400).json({
+            error:"User Already reffered"
         })
         return 0;
     }
@@ -55,8 +55,8 @@ app.post('/refer',async (req,res)=>{
             });
         } catch(e){
         console.log(e);
-        res.status(500).json({
-            error:"Server Error!"
+        res.status(400).json({
+            error:"User Already reffered!"
         })
     }
 });
