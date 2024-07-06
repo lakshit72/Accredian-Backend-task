@@ -1,5 +1,6 @@
 var express = require('express');
 const { PrismaClient } = require('@prisma/client');
+const cors = require('cors');
 
 
 var app = express();
@@ -8,6 +9,7 @@ const prisma = new PrismaClient();
 const PORT = 8080;
 
 app.use(express.json());
+app.use(cors());
 
 app.post('/refer',async (req,res)=>{
     const { email, name, PhoneNo, RefEmail } = req.body;
